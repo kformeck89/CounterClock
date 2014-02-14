@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CounterClock</string>
+    <string name="action_settings">Settings</string>
+    <string name="test">Test</string>
+    <string name="test_string">Testing, Testing</string>
+    <string name="screen_off">Screen Off</string>
+    <string name="make_admin">Make Device Admin</string>
+    <string name="device_admin" translatable="false">@string/app_name</string>
+    <string name="device_admin_description">This is needed to manage the screen off timeout policy.</string>
+
+</resources>
