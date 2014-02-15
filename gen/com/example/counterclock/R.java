@@ -19,15 +19,28 @@ public final class R {
          */
         public static final int activity_horizontal_margin=0x7f050000;
         public static final int activity_vertical_margin=0x7f050001;
+        public static final int colon_font_size=0x7f050003;
+        /**  Clock Dimensions 
+         */
+        public static final int minute_font_size=0x7f050002;
+        public static final int second_font_size=0x7f050004;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int touch_circle=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f090003;
-        public static final int btnAdmin=0x7f090002;
-        public static final int btnScreenOff=0x7f090000;
-        public static final int btnTest=0x7f090001;
+        public static final int action_settings=0x7f09000a;
+        public static final int btnAdmin=0x7f090009;
+        public static final int btnPause=0x7f090007;
+        public static final int btnScreenOff=0x7f090006;
+        public static final int btnShowButtons=0x7f090003;
+        public static final int btnStop=0x7f090005;
+        public static final int btnTest=0x7f090008;
+        public static final int btnUnlock=0x7f090004;
+        public static final int txtColon=0x7f090001;
+        public static final int txtMinutes=0x7f090000;
+        public static final int txtSeconds=0x7f090002;
     }
     public static final class layout {
         public static final int activity_clock=0x7f030000;
@@ -39,12 +52,23 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
+        /**  Clock 
+         */
+        public static final int colon=0x7f060009;
         public static final int device_admin=0x7f060006;
         public static final int device_admin_description=0x7f060007;
         public static final int make_admin=0x7f060005;
+        public static final int pause=0x7f06000c;
         public static final int screen_off=0x7f060004;
+        public static final int stop=0x7f06000a;
         public static final int test=0x7f060002;
+        public static final int test_minute=0x7f06000d;
+        public static final int test_second=0x7f06000e;
         public static final int test_string=0x7f060003;
+        /**  Clock Activity 
+         */
+        public static final int touch_circ_desc=0x7f060008;
+        public static final int unlock=0x7f06000b;
     }
     public static final class style {
         /** 

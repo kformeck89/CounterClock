@@ -8,6 +8,18 @@
     <string name="screen_off">Screen Off</string>
     <string name="make_admin">Make Device Admin</string>
     <string name="device_admin" translatable="false">@string/app_name</string>
-    <string name="device_admin_description">This is needed to manage the screen off timeout policy.</string>
-
+    <string name="device_admin_description">Enables the screen off feature</string>
+    
+    <!-- Clock Activity -->
+    <string name="touch_circ_desc">Touch to Show Buttons</string>
+    
+    <!-- Clock -->
+	<string name="colon">:</string>
+	<string name="stop">stop</string>
+	<string name="unlock">unlock</string>
+	<string name="pause">pause</string>
+	
+	<string name="test_minute">04</string>
+	<string name="test_second">20</string>
+	
 </resources>

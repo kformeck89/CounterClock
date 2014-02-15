@@ -1,4 +1,4 @@
-package com.example.counterclock.activities.receivers;
+package com.example.counterclock.receivers;
 
 import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;

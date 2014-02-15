@@ -1,7 +1,8 @@
 package com.example.counterclock.activities;
 
+import com.example.counterclock.DeviceUtils;
 import com.example.counterclock.R;
-import com.example.counterclock.activities.receivers.AdminReceiver;
+import com.example.counterclock.receivers.AdminReceiver;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -20,6 +21,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		// Initialize
 		Button btnTest = (Button)findViewById(R.id.btnTest);
 		Button btnAdmin = (Button)findViewById(R.id.btnAdmin);
 		btnTest.setOnClickListener(testClickListener);
@@ -27,6 +29,7 @@ public class MainActivity extends Activity {
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
@@ -41,11 +44,7 @@ public class MainActivity extends Activity {
 	private OnClickListener adminClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View view) {
-			ComponentName admin = new ComponentName(MainActivity.this, AdminReceiver.class);
-			Intent intent = new Intent(
-						DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN)
-								.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, admin);
-			startActivity(intent);
+			DeviceUtils.launchDeviceAdminSettings(MainActivity.this);
 		}
 	};
 
