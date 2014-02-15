@@ -12,14 +12,16 @@
         android:layout_toLeftOf="@+id/txtColon"
         android:layout_centerVertical="true"
         android:text="@string/test_minute"
-        android:textSize="@dimen/minute_font_size" />
+        android:textSize="@dimen/minute_font_size"
+        android:textColor="@android:color/white" />
     <TextView 
         android:id="@id/txtColon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/colon"
-        android:textSize="@dimen/colon_font_size" />
+        android:textSize="@dimen/colon_font_size"
+        android:textColor="@android:color/white" />
     <TextView 
         android:id="@+id/txtSeconds"
         android:layout_width="wrap_content"
@@ -27,54 +29,65 @@
         android:layout_toRightOf="@id/txtColon"
         android:layout_centerVertical="true"
         android:text="@string/test_second"
-        android:textSize="@dimen/second_font_size" />
+        android:textSize="@dimen/second_font_size"
+        android:textColor="@android:color/white" />
        
     <!-- Buttons -->
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp" 
+        android:layout_height="300dp" 
         android:layout_alignParentBottom="true" >
         <ImageButton 
             android:id="@+id/btnShowButtons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/touch_button_diameter"
+            android:layout_height="@dimen/touch_button_diameter"
             android:layout_centerInParent="true"
-            android:src="@drawable/touch_circle"
+            android:background="@drawable/touch_circle"
             android:contentDescription="@string/touch_circ_desc" />
-        <Button
+        <ImageButton
             android:id="@+id/btnUnlock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/btnShowButtons"
             android:layout_centerHorizontal="true"
-            android:text="@string/unlock"
-            android:visibility="invisible" />
-        <Button
+            android:layout_margin="@dimen/button_margin"
+            android:background="@drawable/button_circle"
+            android:src="@drawable/ic_unlock_device"
+            android:visibility="invisible"
+            android:contentDescription="@string/unlock_desc" />
+        <ImageButton
             android:id="@+id/btnStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/btnScreenOff"
-            android:text="@string/stop"
-            android:visibility="invisible" />
-        <Button
+            android:layout_margin="@dimen/button_margin"
+            android:background="@drawable/button_circle"
+            android:src="@drawable/ic_stop"
+            android:visibility="invisible"
+            android:contentDescription="@string/stop_desc" />
+        <ImageButton
             android:id="@+id/btnPause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btnStop"
-            android:layout_alignBottom="@+id/btnStop"
+			android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/btnScreenOff"
-            android:text="@string/pause"
-            android:visibility="invisible" />
-        <Button
+            android:layout_margin="@dimen/button_margin"
+            android:background="@drawable/button_circle"
+            android:src="@drawable/ic_pause"
+            android:visibility="invisible"
+            android:contentDescription="@string/pause_desc" />
+        <ImageButton
             android:id="@+id/btnScreenOff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btnPause"
             android:layout_centerHorizontal="true"
-            android:text="@string/screen_off"
-            android:visibility="invisible" />
-
+            android:layout_margin="@dimen/button_margin"
+			android:background="@drawable/button_circle"
+            android:src="@drawable/ic_lock_device"
+            android:visibility="invisible"
+            android:contentDescription="@string/lock_desc" />
     </RelativeLayout>
 
         

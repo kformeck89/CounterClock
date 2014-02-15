@@ -46,10 +46,10 @@ public class ClockActivity extends Activity {
 	private boolean paused;
 	private Handler handler = new Handler();
 	private ImageButton btnShowButtons = null;
-	private Button btnStop = null;
-	private Button btnPause = null;
-	private Button btnUnlock = null;
-	private Button btnScreenOff = null;
+	private ImageButton btnStop = null;
+	private ImageButton btnPause = null;
+	private ImageButton btnUnlock = null;
+	private ImageButton btnScreenOff = null;
 	
 	@TargetApi(19)
 	private void handleWindowFocusChanged(boolean hasFocus) {
@@ -119,10 +119,10 @@ public class ClockActivity extends Activity {
 		
 		// Initialize
 		btnShowButtons = (ImageButton)findViewById(R.id.btnShowButtons);
-		btnStop = (Button)findViewById(R.id.btnStop);
-		btnPause = (Button)findViewById(R.id.btnPause);
-		btnUnlock = (Button)findViewById(R.id.btnUnlock);
-		btnScreenOff = (Button)findViewById(R.id.btnScreenOff);
+		btnStop = (ImageButton)findViewById(R.id.btnStop);
+		btnPause = (ImageButton)findViewById(R.id.btnPause);
+		btnUnlock = (ImageButton)findViewById(R.id.btnUnlock);
+		btnScreenOff = (ImageButton)findViewById(R.id.btnScreenOff);
 		
 		TextView txtMinutes = (TextView)findViewById(R.id.txtMinutes);
 		TextView txtSeconds = (TextView)findViewById(R.id.txtSeconds);

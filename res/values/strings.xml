@@ -12,6 +12,10 @@
     
     <!-- Clock Activity -->
     <string name="touch_circ_desc">Touch to Show Buttons</string>
+    <string name="unlock_desc">Unlock Device</string>
+    <string name="pause_desc">Pause the timer</string>
+    <string name="stop_desc">Stop the timer (Resets to 0:00)</string>
+    <string name="lock_desc">Re-Lock Device (Screen-Off)</string>
     
     <!-- Clock -->
 	<string name="colon">:</string>

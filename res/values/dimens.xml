@@ -4,6 +4,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     
+    <!-- Clock Activity -->
+    <dimen name="touch_button_diameter">48dp</dimen>
+    <dimen name="button_margin">20dp</dimen>
+    
     <!-- Clock Dimensions -->
 	<dimen name="minute_font_size">72sp</dimen>
 	<dimen name="colon_font_size">72sp</dimen>
