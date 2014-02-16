@@ -1,8 +1,5 @@
 package com.example.counterclock.activities;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -10,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,14 +15,12 @@ import android.os.PowerManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.counterclock.DeviceUtils;
 import com.example.counterclock.R;
-
 
 public class ClockActivity extends Activity {
 	private final BroadcastReceiver turnScreenOffReceiver = new TurnScreenOffReceiver();
@@ -39,8 +35,6 @@ public class ClockActivity extends Activity {
 			}
 		}
 	};
-	private String minute = "00";
-	private String second = "00";
 	private boolean unlocking;
 	private boolean locking;
 	private boolean paused;
@@ -50,6 +44,9 @@ public class ClockActivity extends Activity {
 	private ImageButton btnPause = null;
 	private ImageButton btnUnlock = null;
 	private ImageButton btnScreenOff = null;
+	private TextView txtMinutes = null;
+	private TextView txtSeconds = null;
+	private Stopwatch stopwatch = null;
 	
 	@TargetApi(19)
 	private void handleWindowFocusChanged(boolean hasFocus) {
@@ -124,8 +121,8 @@ public class ClockActivity extends Activity {
 		btnUnlock = (ImageButton)findViewById(R.id.btnUnlock);
 		btnScreenOff = (ImageButton)findViewById(R.id.btnScreenOff);
 		
-		TextView txtMinutes = (TextView)findViewById(R.id.txtMinutes);
-		TextView txtSeconds = (TextView)findViewById(R.id.txtSeconds);
+		txtMinutes = (TextView)findViewById(R.id.txtMinutes);
+		txtSeconds = (TextView)findViewById(R.id.txtSeconds);
 		
 		btnShowButtons.setOnClickListener(showButtonsListener);
 		btnStop.setOnClickListener(stopClickListener);
@@ -134,6 +131,8 @@ public class ClockActivity extends Activity {
 		btnScreenOff.setOnClickListener(screenOffListener);
 		txtMinutes.setText(R.string.test_minute);
 		txtSeconds.setText(R.string.test_second);
+		
+		stopwatch = new Stopwatch();
 		
 		// Register the screen off broadcast receiver
 		registerReceiver(turnScreenOffReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF));
@@ -146,6 +145,7 @@ public class ClockActivity extends Activity {
 		unlocking = false;
 		handler.removeCallbacks(pauseShieldRunnable);
 		handleWindowFocusChanged(true);
+		stopwatch.start();
 	}
 	@Override
 	protected void onPause() {
@@ -159,6 +159,7 @@ public class ClockActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(turnScreenOffReceiver);
+		stopwatch.stop();
 	}
 	@Override
 	public void onWindowFocusChanged(boolean hasFocus) {
@@ -194,13 +195,13 @@ public class ClockActivity extends Activity {
 	private OnClickListener stopClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View view) {
-			
+			stopwatch.stop();
 		}
 	};
 	private OnClickListener pauseClickListener = new OnClickListener() {
 		@Override
 		public void onClick(View view) {
-			
+			stopwatch.pause();
 		}
 	};
 	private OnClickListener unlockClickListener = new OnClickListener() {
@@ -216,39 +217,81 @@ public class ClockActivity extends Activity {
 		}
 	};
 	
+	private class Stopwatch {
+		private int minutes;
+		private int seconds;
+		private boolean stopTimer;
+		private CounterTask counter;
+		
+		public Stopwatch() {
+			minutes = 0;
+			seconds = 0;
+			stopTimer = false;
+			counter = new CounterTask();
+		}
+		
+		private void resetTimer() {
+			minutes = 0;
+			seconds = 0;
+		}
+		private void updateCurrentTime() {
+			if (!stopTimer) {
+				seconds++;
+				if (seconds < 10) {
+					txtSeconds.setText("0" + Integer.toString(seconds));
+				} else if (seconds >= 10 && seconds < 60) {
+					txtSeconds.setText(Integer.toString(seconds));
+				}
+				else if (seconds >= 60) {
+					seconds = 0;
+					minutes++;
+					if (minutes < 10) {
+						txtMinutes.setText("0" + Integer.toString(minutes));
+					} else if (minutes >= 10) {
+						txtMinutes.setText(Integer.toString(minutes));
+					}
+					txtSeconds.setText("0" + Integer.toString(seconds));
+				}
+				start();
+			} else {
+				stop();
+			}
+		}
+		public void start() {
+			if (counter.getStatus() == AsyncTask.Status.FINISHED) {
+				counter.execute();	
+			}
+		}
+		public void stop() {
+			pause();
+			resetTimer();
+		}
+		public void pause() {
+			if (counter.getStatus() != AsyncTask.Status.FINISHED) {
+				counter.cancel(true);
+			}
+		}
+		
+		private class CounterTask extends AsyncTask<Void, Void, Void> {
+			@Override
+			protected Void doInBackground(Void... params) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+			@Override
+			protected void onPostExecute(Void params) {
+				updateCurrentTime();
+			}
+		}
+	}
   	private class TurnScreenOffReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(final Context context, Intent intent) {
 			finish();
 		}
 	}
-	
-  	
-  	//private class Stopwatch {
-	//	
-	//	
-	//	public Stopwatch() { }
-	//	
-	//	public void startTimer() {
-	//		Timer secondTimer = new Timer();
-	//		Timer minuteTimer = new Timer();
-	//		if (stopOrPausePressed) {
-	//			
-	//		}
-	//		secondTimer.schedule(new SecondCountTask(), 0, 1000);
-	//		minuteTimer.schedule(new MinuteCountTask(), 0 ,10000);		
-	//	}
-	//}
-	//private class SecondCountTask extends TimerTask {
-	//	@Override
-	//	public void run() {
-	//		Stopwatch watch = new StopWatch();
-	//	}		
-	//}
-	//private class MinuteCountTask extends TimerTask {
-	//	@Override
-	//	public void run() {
-	//		
-	//	}
-	//}
-}
+  }
